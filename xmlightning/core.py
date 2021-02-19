@@ -8,11 +8,16 @@ from collections.abc import Callable
 
 class Lightning(object):
 
-    """ read the damn docs that took me time to write """
+    """
+    Takes in no parameters for __init__; however, __init__ is required
+    """
 
 
     def __init__(self):
-        self.__routes: Dict[str, function] = {}
+        self.__routes: Dict[str, Callable] = {}
+
+    def get_routes(self) -> Dict[str, Callable]:
+        return self.__routes
 
     def route(self, path: AnyStr) -> None:
         """ Creates a route for the provided path """
@@ -24,7 +29,28 @@ class Lightning(object):
         return inner
 
     def parse(self, xml_like_document: Union[AnyStr, TextIOWrapper]) -> None:
+        """  """
         xml_document_root = ElementTree.parse(xml_like_document).getroot()
         for path_as_string, function_ in self.__routes.items():
             for element in xml_document_root.findall(path_as_string):
                 function_(element)
+
+class LightningAsClass(object):
+    __routes: Dict[str, Callable] = {}
+
+    @classmethod
+    def route(cls, path: AnyStr) -> None:
+        """ Creates a route for the provided path """
+        def inner(function_: Callable):
+            cls.__routes[path] = function_
+            def wrapper(element):
+                pass
+            return wrapper
+        return inner
+
+    @classmethod
+    def parse(cls, xml_like_document: Union[AnyStr, TextIOWrapper]) -> None:
+        xml_document_root = ElementTree.parse(xml_like_document).getroot()
+        for path_as_string, function_ in cls.__routes.items():
+            for element in xml_document_root.findall(path_as_string):
+                function_(None, element)
