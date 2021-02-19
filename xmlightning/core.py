@@ -44,6 +44,10 @@ class LightningAlternative(object):
     __routes: Dict[str, Callable] = {}
 
     @classmethod
+    def get_routes(cls) -> Dict[str, Callable]:
+        return cls.__routes
+
+    @classmethod
     def route(cls, path: AnyStr) -> None:
         """ Creates a route for the provided path """
         def inner(function_: Callable):
