@@ -35,7 +35,7 @@ class Lightning(object):
             for element in xml_document_root.findall(path_as_string):
                 function_(element)
 
-class LightningAsClass(object):
+class LightningAlternative(object):
     __routes: Dict[str, Callable] = {}
 
     @classmethod
