@@ -7,8 +7,9 @@ from collections.abc import Callable
 
 
 class Lightning(object):
-    
-    """ read the damn docs that took me time to write"""
+
+    """ read the damn docs that took me time to write """
+
 
     def __init__(self):
         self.__routes: Dict[str, function] = {}
