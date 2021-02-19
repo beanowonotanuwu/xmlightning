@@ -57,7 +57,7 @@ class Lightning(_Lightning):
                 function_(element)
 
 
-class LightningAlternative(object):
+class LightningAlternative(_Lightning):
 
     """
     Alternative declaration of the Lightning class
