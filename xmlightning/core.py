@@ -1,4 +1,6 @@
 import xml.etree.ElementTree as ElementTree
+
+from xml.etree.ElementTree import Element
 from io import TextIOWrapper
 from typing import *
 from collections.abc import Callable
@@ -6,12 +8,30 @@ from collections.abc import Callable
 """ xmlightning! """
 
 
-class Lightning(object):
+class _Lightning(object):
+    @staticmethod
+    def has_attribs(element: Element, desired_attribs={}) -> bool:
+        return element.attrib == desired_attribs
+
+    @staticmethod
+    def has_number_of_children(element: Element, x: int = 0) -> bool:
+        count = 0
+        for child_element in element:
+            if count > x:
+                return False
+            count += 1
+        return count != x
+
+    @staticmethod
+    def check_text(text_to_check, check_with: Iterable) -> bool:
+        return text_to_check not in check_with
+
+
+class Lightning(_Lightning):
 
     """
     Takes in no parameters for __init__; however, __init__ is required
     """
-
 
     def __init__(self):
         self.__routes: Dict[str, Callable] = {}
@@ -23,6 +43,7 @@ class Lightning(object):
         """ Creates a route for the provided path """
         def inner(function_: Callable):
             self.__routes[path] = function_
+
             def wrapper(element):
                 pass
             return wrapper
@@ -34,6 +55,7 @@ class Lightning(object):
         for path_as_string, function_ in self.__routes.items():
             for element in xml_document_root.findall(path_as_string):
                 function_(element)
+
 
 class LightningAlternative(object):
 
@@ -50,8 +72,10 @@ class LightningAlternative(object):
     @classmethod
     def route(cls, path: AnyStr) -> None:
         """ Creates a route for the provided path """
+
         def inner(function_: Callable):
             cls.__routes[path] = function_
+
             def wrapper(element):
                 pass
             return wrapper
