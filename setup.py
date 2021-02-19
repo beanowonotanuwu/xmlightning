@@ -6,8 +6,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name="xmlightning",
     version="0.0.1",
-    author="hunterg",
-    author_email="redissuslolol@gmail.com",
+    author="hunterg3",
+    author_email="hunterg123987@gmail.com",
     description="Allows you to create a simple and advanced xml parser",
     long_description=long_description,
     long_description_content_type="text/markdown",
