@@ -24,7 +24,6 @@ class Lightning(object):
 
     def parse(self, xml_like_document: Union[AnyStr, TextIOWrapper]) -> None:
         xml_document_root = ElementTree.parse(xml_like_document).getroot()
-        print(self.__routes)
         for path_as_string, function_ in self.__routes.items():
             for element in xml_document_root.findall(path_as_string):
                 function_(element)
