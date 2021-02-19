@@ -36,6 +36,11 @@ class Lightning(object):
                 function_(element)
 
 class LightningAlternative(object):
+
+    """
+    Alternative declaration of the Lightning class
+    """
+
     __routes: Dict[str, Callable] = {}
 
     @classmethod
