@@ -3,4 +3,4 @@ from xml.etree.ElementTree import Element
 
 
 __all__ = ["Lightning", "LightningAlternative", "Element"]
-__version__ = "0.1.0"
+__version__ = "0.1.5"
