@@ -60,7 +60,7 @@ class Lightning(_Lightning):
 class LightningAlternative(_Lightning):
 
     """
-    Alternative declaration of the Lightning class
+    Deprecated
     """
 
     __routes: Dict[str, Callable] = {}
